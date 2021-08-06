@@ -7,6 +7,29 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
+    },
+    height: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
+    },
+    weight: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      }
+    },
+    lifeSpan: {
+      type: DataTypes.STRING
+    },
+    urlImage: {
+      type: DataTypes.STRING
     },
   });
 };
