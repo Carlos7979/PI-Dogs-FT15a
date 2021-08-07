@@ -19,10 +19,14 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-
+const { fillTemperaments } = require('./data');
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
+  server.listen(3001, async () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
+    // imitando el prellenado de la base de datos de la homework de sequelize
+    // en estas líneas voy a realizar el prellenado de los temperamentos
+    await fillTemperaments();
+    console.log('Temperaments loaded to database');
   });
 });
