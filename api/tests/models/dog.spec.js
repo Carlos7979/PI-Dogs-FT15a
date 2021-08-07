@@ -98,7 +98,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -115,7 +115,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -132,7 +132,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -149,31 +149,31 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
             expect(error.message).to.equal(`Validation error: Validation notEmpty on name failed`);
         }
       });
-      // it('should fail on number name', async () => {
-      //   name = 5;
-      //   try {
-      //     const dog = await Dog.create({
-      //       name,
-      //       height,
-      //       weight,
-      //       lifeSpan,
-      //       urlImage
-      //     });
-      //     console.log(dog);
-      //     throw Error('should not reach this point')
-      //   } catch (error) {
-      //       expect(error).to.exist;
-      //       expect(error).to.be.instanceOf(Error);
-      //       expect(error.message).to.equal(`Validation notEmpty on name failed`);
-      //   }
-      // });
+      it('should fail on number name', async () => {
+        name = '5.3';
+        try {
+          const dog = await Dog.create({
+            name,
+            height,
+            weight,
+            lifeSpan,
+            urlImage
+          });
+          console.log(dog);
+          throw Error('should not reach this point');
+        } catch (error) {
+            expect(error).to.exist;
+            expect(error).to.be.instanceOf(Error);
+            expect(error.message).to.equal(`Name cannot be a number`);
+        }
+      });
       it('should fail on undefined height', async () => {
         height = undefined;
         try {
@@ -184,7 +184,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -201,7 +201,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -218,7 +218,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -235,7 +235,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -252,7 +252,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -269,7 +269,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -286,7 +286,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
@@ -303,7 +303,7 @@ describe('Model Testing', () => {
             lifeSpan,
             urlImage
           });
-          throw Error('should not reach this point')
+          throw Error('should not reach this point');
         } catch (error) {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);

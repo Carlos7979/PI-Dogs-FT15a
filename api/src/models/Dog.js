@@ -31,5 +31,14 @@ module.exports = (sequelize) => {
     urlImage: {
       type: DataTypes.STRING
     },
+  }, {
+    hooks: {
+      beforeValidate: dog => {
+        if (!dog.name) return;
+        const number = parseInt(dog.name);
+        if (Number.isNaN(number)) return;
+        if(typeof number === 'number') throw new Error ('Name cannot be a number');
+      }
+    }
   });
 };
