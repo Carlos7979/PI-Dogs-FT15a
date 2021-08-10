@@ -1,11 +1,11 @@
 const { axios } = require('common');
 const { Router } = require('express');
-const { dogToSendFromApi, dogToSendFromDB, temperamentToSend, middleware: { bodyValidator } } = require('../../utils');
+const { dogToSendFromApi, dogToSendFromDB, middleware: { bodyValidator } } = require('../../utils');
 const { Dog, Temperament } = require('../db');
 
 const router = Router();
 
-router.post('/', bodyValidator, async (req, res) => {
+router.post('/', bodyValidator, async (req, res, next) => {
     try {
         const { name, height, weight, lifeSpan, urlImage, temperaments } = req.body;
         const dog = await Dog.create({
@@ -39,13 +39,14 @@ router.post('/', bodyValidator, async (req, res) => {
         if (!dog) return res.status(404).json({error: 'Dog is not created'});
         res.status(200).json(dogToSendFromDB(dog));
     } catch (error) {
-        res.status(404).json({error});
-        return console.log('Error: ', error);
+        // res.status(500).json({error: error.message});
+        // return console.log('Error: ', error);
+        next(error);
     }
 })
 
-router.get('/', async (req, res) => {
-    try {
+router.get('/', async (req, res, next) => {
+    try { 
         const response = await axios.get('https://api.thedogapi.com/v1/breeds');
         const dogs = response.data;
         const localDbDogs = await Dog.findAll({
@@ -79,12 +80,13 @@ router.get('/', async (req, res) => {
         }
         res.json(dogsToSend);
     } catch (error) {
-        res.status(404).json({error});
-        return console.log('Error: ', error);
+        // res.status(500).json({error: error.message});
+        // return console.log('Error: ', error);
+        next(error);
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
         if (!Number.isNaN(id)) {
@@ -101,8 +103,9 @@ router.get('/:id', async (req, res) => {
         return dog.length > 0 ? res.json(dogToSendFromApi(dog[0])) : 
             res.status(404).json({error: "There isn't any dog with the indicated id"});
     } catch (error) {
-        res.status(404).json({error});
-        return console.log('Error: ', error);
+        // res.status(500).json({error: error.message});
+        // return console.log('Error: ', error);
+        next(error);
     }
 });
 

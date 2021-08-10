@@ -4,7 +4,7 @@ const { temperamentToSend } = require('../../utils')
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
     try {
         const temperaments = await Temperament.findAll();
         const temperamentsToSend = [];
@@ -13,7 +13,9 @@ router.get('/', async (req, res) => {
         }
         res.json(temperamentsToSend);
     } catch (error) {
-        return console.log('Error: ', error);
+        // res.status(500).json({error: error.message});
+        // return console.log('Error: ', error);
+        next(error);
     }
 });
 
