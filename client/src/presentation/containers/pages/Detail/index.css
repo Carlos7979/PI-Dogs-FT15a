@@ -1,0 +1,8 @@
+.detail-title {
+    color: whitesmoke;
+    font-size: xx-large;
+    border: whitesmoke solid 1px;
+    border-radius: 5px;
+    background:slateblue;
+    margin: 10px;
+}
