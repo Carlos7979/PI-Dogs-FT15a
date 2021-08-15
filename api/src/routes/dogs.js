@@ -67,7 +67,8 @@ router.get('/', async (req, res, next) => {
                     }
                 }
             }
-            return res.json(dogsToSend);
+            if (dogsToSend.length > 0) return res.json(dogsToSend);
+            return res.status(404).json({error: "There isn't any dog with the indicated query name"});
         }
         for (const dog of dogs) {
             dogsToSend.push(dogToSendFromApi(dog));
