@@ -6,8 +6,11 @@ import Create from './pages/Create';
 import Detail from './pages/Detail';
 import Nav from '../components/Nav';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
 
   // useEffect(() => {
   //   if (sessionStorage.login) {

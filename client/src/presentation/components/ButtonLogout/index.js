@@ -1,9 +1,16 @@
+import { useDispatch } from 'react-redux';
+import { isLog } from '../../../logic/actions'
 import './index.css';
 
 function ButtonLogout(props) {
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        props.logout();
+        dispatch(isLog(''));
+    }
     return (
-        <button onClick={props.logout}>
-            Salir
+        <button onClick={handleClick}>
+            Log out
         </button>
     )
 }
