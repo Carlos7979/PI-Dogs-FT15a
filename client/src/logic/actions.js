@@ -1,7 +1,10 @@
 import call from '../data/dogs-api';
 // const call = require('../data/dogs-api');
 
+const url = 'http://localhost:3001/api-dogs/';
+
 export const ISLOG = 'ISLOG';
+export const GETALLDOGS = 'GETALLDOGS';
 
 // (async () => {
 //     const result = await call('http://localhost:3001/api-dogs/temperaments');
@@ -14,3 +17,33 @@ export function isLog(payload) {
         payload
     }
 }
+
+export function getDogs() {
+    return async dispatch => {
+        try {
+            const dogs = await call(`${url}/dogs`);
+            // console.log(dogs)
+            dispatch({
+                type: GETALLDOGS,
+                payload: dogs
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+}
+
+// export function getDogs() {
+//     return function (dispatch) {
+//         return call(`${url}/dogs`)
+//             // .then(response => console.log(response))
+//             .then(response => {
+//                 dispatch({
+//                     type: GETALLDOGS,
+//                     payload: response
+//                 })
+//             })
+//             .catch(error => console.log(error))
+//     }
+// }

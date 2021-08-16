@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { isLog } from '../../../logic/actions'
+import { isLog, resetState } from '../../../logic/actions'
 import './index.css';
 
 function ButtonLogout(props) {
