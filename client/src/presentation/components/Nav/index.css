@@ -1,0 +1,21 @@
+.nav {
+    border: solid black 1px;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: rgb(230, 223, 161);
+}
+
+.selected {
+    color: grey;
+}
+
+.navElements {
+    font-weight: bolder;
+    margin: 0 20px;
+}
+
+/* .activeStyle {
+    color: greenyellow;
+} */
