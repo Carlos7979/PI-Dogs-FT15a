@@ -1,4 +1,5 @@
 import './index.css';
+import Search from '../../../components/Search';
 
 function Home() {
     return (
@@ -6,6 +7,7 @@ function Home() {
             <div className="home-title">
                 Home page
             </div>
+            <Search/>
         </section>
     )
 }
