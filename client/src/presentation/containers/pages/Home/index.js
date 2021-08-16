@@ -1,5 +1,6 @@
 import './index.css';
 import Search from '../../../components/Search';
+import Dogs from '../../../components/Dogs';
 
 function Home() {
     return (
@@ -8,6 +9,7 @@ function Home() {
                 Home page
             </div>
             <Search/>
+            <Dogs/>
         </section>
     )
 }
