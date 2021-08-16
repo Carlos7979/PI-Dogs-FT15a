@@ -5,4 +5,7 @@
     padding: 5px;
     border: solid black 1px;
     border-radius: 5px;
+    /* background-image: url('dog_pattern-20.jpg');
+    background-size: contain; */
+    background-color: khaki;
 }

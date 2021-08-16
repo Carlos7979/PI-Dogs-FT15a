@@ -10,10 +10,10 @@ function Landing(props) {
     }
     return (
         <section className="landing">
-            <div className="landing-title">
+            {/* <div className="landing-title">
                 Landing page
-            </div>
-            <button onClick={handleClick}>
+            </div> */}
+            <button className="logginButton" onClick={handleClick}>
                 Log in
             </button>
         </section>

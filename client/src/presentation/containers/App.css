@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+
+body {
+  background-image: url('../images/dog_pattern-20.jpg');
+  background-size: cover;
+}
+
+.appTitle {
+  background: khaki;
+  width: 20%;
+  margin: 20px auto;
+  border-radius: 5px;
+  padding-bottom: 5px;
+}

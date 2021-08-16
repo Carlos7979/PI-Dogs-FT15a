@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Henry Dogs</h1>
+      <h1 className="appTitle">Henry Dogs</h1>
       <Route 
         path="/"
         render={() => sessionStorage.login ? 
