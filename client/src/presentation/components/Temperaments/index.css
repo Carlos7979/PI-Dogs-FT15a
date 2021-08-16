@@ -1,0 +1,11 @@
+.temperaments {
+    margin: 5px;
+    border-radius: 5px;
+    /* background-color: rgba(240, 230, 140, 1); */
+    height: 80px;
+}
+
+.title {
+    font-weight: bold;
+}
+
