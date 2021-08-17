@@ -1,0 +1,10 @@
+.searchButtons {
+    /* display: flex; */
+    /* justify-content: space-between; */
+    width: 90%;
+    margin-top: 2px;
+}
+
+#filter {
+    margin: 0 15px;
+}

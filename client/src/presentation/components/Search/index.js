@@ -1,6 +1,7 @@
 import './index.css'
 import { getDogs, searchDogs } from '../../../logic/actions'
 import { useDispatch, useSelector } from 'react-redux';
+import SearchButtons from '../SearchButtons';
 
 function Search() {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function Search() {
         <div className="search">
             <label htmlFor="search">Search Dogs by Breed</label>
             <input id="search" onKeyDown={handleKeyDown} type="text" onChange={handleChange} value={search}/>
-            <button type="submit" onClick={handleClick}>Search</button>
+            <SearchButtons handleClick={handleClick}/>
         </div>
     )
 }
