@@ -8,7 +8,7 @@ function Dog({dog}) {
     return (
         <div className="dog">
             <Name name={name}/>
-            <Image src={urlImage}/>
+            <Image src={urlImage} alt={name}/>
             <Temperaments temperaments={temperament}/>
         </div>
     )
