@@ -1,16 +1,11 @@
 import call from '../data/dogs-api';
-// const call = require('../data/dogs-api');
 
 const url = 'http://localhost:3001/api-dogs/';
 
 export const ISLOG = 'ISLOG';
 export const GETALLDOGS = 'GETALLDOGS';
 export const SETPAGE = 'SETPAGE';
-
-// (async () => {
-//     const result = await call('http://localhost:3001/api-dogs/temperaments');
-//     console.log(result);
-// })();
+export const SEARCH = 'SEARCH';
 
 export function isLog(payload) {
     return {
@@ -26,11 +21,25 @@ export function setPage(payload) {
     }
 }
 
-export function getDogs() {
+export function searchDogs(payload) {
+    return {
+        type: SEARCH,
+        payload
+    }
+}
+
+export function getDogs(name) {
     return async dispatch => {
         try {
-            const dogs = await call(`${url}/dogs`);
-            // console.log(dogs)
+            let path = '/dogs';
+            if (name) path = path + `?name=${name}`;
+            let dogs = await call(`${url}${path}`);
+            if (dogs.status === 404) {
+                dogs = [{
+                    name: 'Not founded dog',
+                    urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
+                }];
+            }
             dispatch({
                 type: GETALLDOGS,
                 payload: dogs
