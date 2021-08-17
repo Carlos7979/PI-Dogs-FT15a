@@ -10,14 +10,14 @@ function Pages({pages, page}) {
         dispatch(setPage(value));
     }
     return (
-        <div>
-            Page
+        <div className="pageChange">
+            <span>Page</span>
             <select value={page} onChange={handleChange}>
                 {numbers.map((element, index) => {
                     return <option key={`page-${index}`}>{index + 1}</option>
                 })}
             </select>
-            of {pages}
+            <span>of {pages}</span>
         </div>
     )
 }

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: whitesmoke;
+    background: rgba(245, 245, 245, 0.9);
     border-radius: 5px;
     border: solid black 1px;
     width: 90%;
