@@ -1,11 +1,10 @@
 import './index.css';
+import RouteTitle from '../../../components/RouteTitle';
 
 function Detail() {
     return (
         <section className="detail">
-            <div className="detail-title">
-                Detail page
-            </div>
+            {/* <RouteTitle title={'Detail'} color={'whitesmoke'} background={'slateblue'}/> */}
         </section>
     )
 }

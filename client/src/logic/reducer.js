@@ -1,4 +1,4 @@
-import { ISLOG, GETALLDOGS } from './actions';
+import { ISLOG, GETALLDOGS, SETPAGE } from './actions';
 
 const initialState = {
     isLoggedIn: '',
@@ -14,6 +14,9 @@ function reducer(state = initialState, action) {
 
         case GETALLDOGS:
             return {...state, dogs: action.payload};
+
+        case SETPAGE:
+            return {...state, page: action.payload};
 
         default:
             return state;

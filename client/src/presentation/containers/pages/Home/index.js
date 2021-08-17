@@ -1,14 +1,13 @@
 import './index.css';
 import Search from '../../../components/Search';
 import Dogs from '../../../components/Dogs';
+import RouteTitle from '../../../components/RouteTitle';
 
 function Home() {
     return (
         <section className="home">
-            <div className="home-title">
-                Home page
-            </div>
-            <Search/>
+            {/* <RouteTitle title={'Home'} color={'chocolate'} background={'mediumseagreen'}/> */}
+            {/* <Search/> */}
             <Dogs/>
         </section>
     )

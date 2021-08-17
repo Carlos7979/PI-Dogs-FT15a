@@ -1,0 +1,10 @@
+.routeTitle {
+    color: gray;
+    font-size: xx-large;
+    border: gray solid 1px;
+    border-radius: 5px;
+    background: whitesmoke;
+    margin: 10px;
+    width: 20%;
+    /* margin: 20px auto; */
+}

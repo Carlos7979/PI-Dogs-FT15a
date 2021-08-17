@@ -1,11 +1,10 @@
 import './index.css';
+import RouteTitle from '../../../components/RouteTitle';
 
 function Create() {
     return (
         <section className="create">
-            <div className="create-title">
-                Create page
-            </div>
+            {/* <RouteTitle title={'Create'} color={'chocolate'} background={'khaki'}/> */}
         </section>
     )
 }

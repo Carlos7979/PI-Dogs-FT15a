@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Create from './pages/Create';
 import Detail from './pages/Detail';
 import Nav from '../components/Nav';
+import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -28,11 +29,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="appTitle">Henry Dogs</h1>
+      {!sessionStorage.login && <h1 className="appTitle">Henry Dogs</h1>}
       <Route 
         path="/"
-        render={() => sessionStorage.login ? 
-          <Nav logout={handleLogout}/> : 
+        render={({location}) => sessionStorage.login ? 
+          <Header logout={handleLogout} location={location}/> : 
           <Redirect to="/"/> }>
       </Route>
       <Switch>

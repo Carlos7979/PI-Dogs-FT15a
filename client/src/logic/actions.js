@@ -5,6 +5,7 @@ const url = 'http://localhost:3001/api-dogs/';
 
 export const ISLOG = 'ISLOG';
 export const GETALLDOGS = 'GETALLDOGS';
+export const SETPAGE = 'SETPAGE';
 
 // (async () => {
 //     const result = await call('http://localhost:3001/api-dogs/temperaments');
@@ -14,6 +15,13 @@ export const GETALLDOGS = 'GETALLDOGS';
 export function isLog(payload) {
     return {
         type: ISLOG,
+        payload
+    }
+}
+
+export function setPage(payload) {
+    return {
+        type: SETPAGE,
         payload
     }
 }

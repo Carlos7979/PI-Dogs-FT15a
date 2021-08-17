@@ -50,3 +50,11 @@ body {
   border-radius: 5px;
   padding-bottom: 5px;
 }
+
+.headerAppTitle {
+  background: khaki;
+  width: 30%;
+  /* margin: 20px auto; */
+  border-radius: 5px;
+  padding-bottom: 5px;
+}
