@@ -44,6 +44,13 @@ module.exports = (sequelize) => {
         if (Number.isNaN(number)) return;
         if(typeof number === 'number') throw new Error ('Name cannot be a number');
       }
-    }
+    },
+    indexes: [
+      { 
+        unique: true,   
+        name: 'unique_name',  
+        fields: [sequelize.fn('lower', sequelize.col('name'))]   
+      }
+    ]
   });
 };

@@ -49,7 +49,7 @@ describe('Model Testing', () => {
         expect(breed.lifeSpan).to.exist;
         expect(breed.urlImage).to.exist;
 
-        expect(breed.id).to.be.a('number');
+        expect(breed.id).to.be.a('string');
         expect(breed.name).to.be.a('string');
         expect(breed.height).to.be.a('string');
         expect(breed.weight).to.be.a('string');
@@ -79,7 +79,7 @@ describe('Model Testing', () => {
         expect(breed.lifeSpan).to.be.null;
         expect(breed.urlImage).to.be.null;
 
-        expect(breed.id).to.be.a('number');
+        expect(breed.id).to.be.a('string');
         expect(breed.name).to.be.a('string');
         expect(breed.height).to.be.a('string');
         expect(breed.weight).to.be.a('string');
@@ -172,6 +172,54 @@ describe('Model Testing', () => {
             expect(error).to.exist;
             expect(error).to.be.instanceOf(Error);
             expect(error.message).to.equal(`Name cannot be a number`);
+        }
+      });
+      it('should fail on repeated name', async () => {
+        // name = 'Saint Bernard';
+        try {
+          const dog = await Dog.create({
+            name,
+            height,
+            weight,
+            lifeSpan,
+            urlImage
+          });
+          const dog2 = await Dog.create({
+            name,
+            height,
+            weight,
+            lifeSpan,
+            urlImage
+          });
+          throw Error('should not reach this point');
+        } catch (error) {
+            expect(error).to.exist;
+            expect(error).to.be.instanceOf(Error);
+            expect(error.message).to.equal(`Validation error`);
+        }
+      });
+      it('should fail on repeated case insensitive name', async () => {
+        try {
+          const dog = await Dog.create({
+            name,
+            height,
+            weight,
+            lifeSpan,
+            urlImage
+          });
+          name = 'Saint bernard';
+          const dog2 = await Dog.create({
+            name,
+            height,
+            weight,
+            lifeSpan,
+            urlImage
+          });
+          throw Error('should not reach this point');
+        } catch (error) {
+            expect(error).to.exist;
+            expect(error).to.be.instanceOf(Error);
+            expect(error.message).to.equal(`Validation error`);
         }
       });
       it('should fail on undefined height', async () => {
