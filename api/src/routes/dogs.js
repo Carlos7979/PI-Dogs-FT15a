@@ -2,7 +2,6 @@ const { axios } = require('common');
 const { Router } = require('express');
 const { dogToSendFromApi, dogToSendFromDB, middleware: { bodyValidator } } = require('../../utils');
 const { Dog, Temperament } = require('../db');
-
 const router = Router();
 
 router.post('/', bodyValidator, async (req, res, next) => {
@@ -13,7 +12,8 @@ router.post('/', bodyValidator, async (req, res, next) => {
         });
         if (temperaments) {
             const temperamentsId = [];
-            for (const temperament of temperaments) {
+            const lowerCaseTemperaments = temperaments.map(temperament => temperament.toLowerCase());
+            for (const temperament of lowerCaseTemperaments) {
                 await Temperament.findOrCreate({
                     where: {
                         name: temperament
@@ -22,7 +22,7 @@ router.post('/', bodyValidator, async (req, res, next) => {
             }
             const temperamentsInDB = await Temperament.findAll({
                 where: {
-                    name: temperaments
+                    name: lowerCaseTemperaments
                 }
             });
             for (const temperament of temperamentsInDB) {
@@ -56,13 +56,13 @@ router.get('/', async (req, res, next) => {
         const { name } = req.query;
         if (name) {
             for (const dog of dogs) {
-                if (dog.name.includes(name)) {
+                if (dog.name.toLowerCase().includes(name.toLowerCase())) {
                     dogsToSend.push(dogToSendFromApi(dog));
                 }
             }
             if (localDbDogs) {
                 for (const dog of localDbDogs) {
-                    if (dog.dataValues.name.includes(name)) {
+                    if (dog.dataValues.name.toLowerCase().includes(name.toLowerCase())) {
                         dogsToSend.push(dogToSendFromDB(dog.dataValues));
                     }
                 }

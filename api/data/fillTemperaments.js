@@ -7,7 +7,7 @@ async function fillTemperaments() {
         const dogs = response.data;
         for (const dog of dogs) {
             if (dog.temperament) {
-                const temperaments = dog.temperament.split(', ');
+                const temperaments = dog.temperament.split(', ').map(temperament => temperament.toLowerCase());
                 if (temperaments.length > 0) {
                     for (const temperament of temperaments) {
                         await Temperament.findOrCreate({
