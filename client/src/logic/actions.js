@@ -133,19 +133,21 @@ export function getDogs(name) {
                     return 0;
                 });
             }
-            dogs = dogs.map(dog => {
-                if (dog.name === 'Smooth Fox Terrier') {
-                    dog.weight = [6, 8];
+            if (dogs.name === 'Not founded dog') {
+                dogs = dogs.map(dog => {
+                    if (dog.name === 'Smooth Fox Terrier') {
+                        dog.weight = [6, 8];
+                        return dog;
+                    }
+                    if (dog.name === 'Olde English Bulldogge') {
+                        dog.weight = [20, 30];
+                        return dog;
+                    }
+                    const array = dog.weight.split(' - ');
+                    dog.weight = [parseInt(array[0]), parseInt(array[1])]
                     return dog;
-                }
-                if (dog.name === 'Olde English Bulldogge') {
-                    dog.weight = [20, 30];
-                    return dog;
-                }
-                const array = dog.weight.split(' - ');
-                dog.weight = [parseInt(array[0]), parseInt(array[1])]
-                return dog;
-            });
+                });
+            }
             dispatch({
                 type: GETDOGS,
                 payload: dogs

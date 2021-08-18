@@ -11,6 +11,7 @@ function Dog({dog}) {
     const dispatch = useDispatch();
     const history = useHistory();
     const handleClick = event => {
+        if(dog.name === 'Not founded dog') return;
         const target = event.target;
         const splitted = target.id.split('-');
         // if (splitted.length === 2) console.log(splitted[1]);

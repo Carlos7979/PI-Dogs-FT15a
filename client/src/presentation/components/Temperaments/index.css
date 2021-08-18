@@ -5,6 +5,12 @@
     height: 80px;
 }
 
+.isDetail {
+    height: max-content;
+    margin: 15px;
+    font-size: larger;
+}
+
 .title {
     font-weight: bold;
 }

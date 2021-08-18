@@ -1,8 +1,11 @@
-.detail-title {
-    color: whitesmoke;
-    font-size: xx-large;
-    border: whitesmoke solid 1px;
-    border-radius: 5px;
-    background:slateblue;
+.dogDetail {
+    width: 90%;
+    height: auto;
     margin: 10px;
+    padding: 5px;
+    border: solid black 1px;
+    border-radius: 5px;
+    /* background-image: url('dog_pattern-20.jpg');
+    background-size: contain; */
+    background-color: rgba(240, 230, 140, 0.9);
 }

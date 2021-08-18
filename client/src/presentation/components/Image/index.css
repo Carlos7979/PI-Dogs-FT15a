@@ -1,5 +1,12 @@
-img {
+.img {
     max-height: 150px;
+    width: auto;
+    border-radius: 5px;
+    border: black solid 1px;
+}
+
+.imageDetail {
+    max-height: 500px;
     width: auto;
     border-radius: 5px;
     border: black solid 1px;
