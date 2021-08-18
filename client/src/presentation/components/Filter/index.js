@@ -21,7 +21,7 @@ function Filter({dogs, filter}) {
         const filtered = [];
         dispatch(setFilter(value));
         for (const dog of dogs) {
-            if (dog.temperament.toLowerCase().includes(value)) {
+            if (dog.temperament && dog.temperament.toLowerCase().includes(value)) {
                 filtered.push(dog);
             }
         }
