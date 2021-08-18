@@ -27,10 +27,11 @@ function App() {
     sessionStorage.login = '';
   }
   
-  const appClassName = isLoggedIn ? 'logged' : 'App'
+  const body = document.getElementsByTagName('body')[0];
+  isLoggedIn ? body.setAttribute('class', 'logged') : body.removeAttribute('class');
 
   return (
-    <div className={appClassName}>
+    <div className='App'>
       {!sessionStorage.login && <h1 className="appTitle">Henry Dogs</h1>}
       <Route 
         path="/"

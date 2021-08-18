@@ -2,11 +2,10 @@
   text-align: center;
 }
 
-.logged {
+body.logged {
   text-align: center;
   background-image: url('../images/dog_pattern-20.jpg');
   background-size: cover;
-  height: 100vh;
 }
 
 .App-logo {
