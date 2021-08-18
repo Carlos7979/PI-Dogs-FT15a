@@ -9,7 +9,7 @@ function Dog({dog}) {
         <div className="dog">
             <Name name={name}/>
             <Image src={urlImage} alt={name}/>
-            <Temperaments temperaments={temperament}/>
+            {name !== 'Not founded dog' && <Temperaments temperaments={temperament}/>}
         </div>
     )
 }
