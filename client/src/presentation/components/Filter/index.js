@@ -15,14 +15,23 @@ function Filter({dogs, filter}) {
             }
         }
     }
-    temperamentsInDogs.sort().unshift('All');
+    temperamentsInDogs.sort().unshift('not registered');
+    temperamentsInDogs.unshift('all');
     const handleChange = event => {
         const value = event.target.value;
         const filtered = [];
         dispatch(setFilter(value));
-        for (const dog of dogs) {
-            if (dog.temperament && dog.temperament.toLowerCase().includes(value)) {
-                filtered.push(dog);
+        if (value === 'not registered') {
+            for (const dog of dogs) {
+                if (!dog.temperament) {
+                    filtered.push(dog);
+                }
+            }
+        } else {
+            for (const dog of dogs) {
+                if (dog.temperament && dog.temperament.toLowerCase().includes(value)) {
+                    filtered.push(dog);
+                }
             }
         }
         dispatch(setFiltered(filtered));

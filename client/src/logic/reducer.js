@@ -8,7 +8,7 @@ const initialState = {
     search: '',
     showFilter: false,
     showOrder: false,
-    filter: 'All',
+    filter: 'all',
     filtered: []
 }
 
@@ -18,7 +18,7 @@ function reducer(state = initialState, action) {
             return { ...initialState, isLoggedIn: action.payload};
 
         case GETDOGS:
-            return {...state, page: 1, filter: 'All', filtered: [], dogs: action.payload};
+            return {...state, page: 1, filter: 'all', filtered: [], dogs: action.payload};
 
         case SETPAGE:
             return {...state, page: action.payload};
@@ -48,7 +48,7 @@ function reducer(state = initialState, action) {
                 search: '',
                 showFilter: false,
                 showOrder: false,
-                filter: 'All',
+                filter: 'all',
                 filtered: []
             };
 
