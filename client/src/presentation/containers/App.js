@@ -26,9 +26,11 @@ function App() {
   const handleLogout = () => {
     sessionStorage.login = '';
   }
-  console.log(sessionStorage.login);
+  
+  const appClassName = isLoggedIn ? 'logged' : 'App'
+
   return (
-    <div className="App">
+    <div className={appClassName}>
       {!sessionStorage.login && <h1 className="appTitle">Henry Dogs</h1>}
       <Route 
         path="/"
