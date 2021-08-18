@@ -2,22 +2,33 @@ import './index.css';
 import Dog from '../Dog';
 import { useSelector } from 'react-redux';
 import Pages from '../Pages';
+import Filter from '../Filter';
+import Order from '../Order';
 
 function Dogs() {
     const dogs = useSelector(state => state.dogs);
     const page = useSelector(state => state.page);
-    const total = dogs.length;
-    const pages = Math.ceil(total/9);
-    const handlePages = (dogs, page) => {
+    const showOrder = useSelector(state => state.showOrder);
+    const showFilter = useSelector(state => state.showFilter);
+    const filter = useSelector(state => state.filter);
+    const filtered = useSelector(state => state.filtered);
+    const pages = Math.ceil(dogs.length/9);
+    const filteredPages = Math.ceil(filtered.length/9);
+    const handlePages = (dogs, page, filtered) => {
         const first = (page -1) * 9;
         const last = page * 9;
+        if (filtered.length > 0) {
+            return filtered.slice(first, last);
+        }
         return dogs.slice(first, last);
     }
     return (
         <div>
-            {pages > 1 && <Pages page={page} pages={pages}/>}
+            {showOrder && <Order/>}
+            {showFilter && <Filter dogs={dogs} filter={filter}/>}
+            {((!filteredPages && pages > 1) || filteredPages > 1) && <Pages page={page} pages={filteredPages || pages}/>}
             <div className="dogs">
-                {handlePages(dogs, page).map((dog, index) => {
+                {handlePages(dogs, page, filtered).map((dog, index) => {
                     return <Dog dog={dog} key={index}/>
                 })}
             </div>

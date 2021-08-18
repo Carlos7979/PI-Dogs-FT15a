@@ -6,7 +6,8 @@ import SearchButtons from '../SearchButtons';
 function Search() {
     const dispatch = useDispatch();
     const search = useSelector(state => state.search);
-    const handleClick = () => {
+
+    const handleClickSearch = () => {
         dispatch(getDogs(search));
     }
     const handleKeyDown = event => {
@@ -21,7 +22,7 @@ function Search() {
         <div className="search">
             <label htmlFor="search">Search Dogs by Breed</label>
             <input id="search" onKeyDown={handleKeyDown} type="text" onChange={handleChange} value={search}/>
-            <SearchButtons handleClick={handleClick}/>
+            <SearchButtons handleClickSearch={handleClickSearch}/>
         </div>
     )
 }

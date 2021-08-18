@@ -3,9 +3,14 @@ import call from '../data/dogs-api';
 const url = 'http://localhost:3001/api-dogs/';
 
 export const ISLOG = 'ISLOG';
-export const GETALLDOGS = 'GETALLDOGS';
+export const GETDOGS = 'GETDOGS';
 export const SETPAGE = 'SETPAGE';
 export const SEARCH = 'SEARCH';
+export const TOGGLEFILTER = 'TOGGLEFILTER';
+export const TOGGLEORDER = 'TOGGLEORDER';
+export const SETFILTER = 'SETFILTER';
+export const SETFILTERED = 'SETFILTERED';
+export const HIDEOPTIONS = 'HIDEOPTIONS';
 
 export function isLog(payload) {
     return {
@@ -28,6 +33,38 @@ export function searchDogs(payload) {
     }
 }
 
+export function toggleFilter() {
+    return {
+        type: TOGGLEFILTER
+    }
+}
+
+export function toggleOrder() {
+    return {
+        type: TOGGLEORDER
+    }
+}
+
+export function setFilter(payload) {
+    return {
+        type: SETFILTER,
+        payload
+    }
+}
+
+export function setFiltered(payload) {
+    return {
+        type: SETFILTERED,
+        payload
+    }
+}
+
+export function hideOptions() {
+    return {
+        type: HIDEOPTIONS
+    }
+}
+
 export function getDogs(name) {
     return async dispatch => {
         try {
@@ -41,7 +78,7 @@ export function getDogs(name) {
                 }];
             }
             dispatch({
-                type: GETALLDOGS,
+                type: GETDOGS,
                 payload: dogs
             })
         } catch (error) {
@@ -57,7 +94,7 @@ export function getDogs(name) {
 //             // .then(response => console.log(response))
 //             .then(response => {
 //                 dispatch({
-//                     type: GETALLDOGS,
+//                     type: GETDOGS,
 //                     payload: response
 //                 })
 //             })
