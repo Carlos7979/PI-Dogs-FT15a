@@ -114,7 +114,7 @@ export function orderFiltered(dogs, order) {
     }
 }
 
-export function getDogs(name) {
+export function getDogs(name, order) {
     return async dispatch => {
         try {
             let path = '/dogs';
@@ -126,14 +126,14 @@ export function getDogs(name) {
                     urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
                 }];
             }
-            if (dogs.length > 1) {
-                dogs.sort((a, b) => {
-                    if (a.name > b.name) return 1;
-                    if (a.name < b.name) return -1;
-                    return 0;
-                });
-            }
-            if (dogs.name === 'Not founded dog') {
+            // if (dogs.length > 1) {
+            //     dogs.sort((a, b) => {
+            //         if (a.name > b.name) return 1;
+            //         if (a.name < b.name) return -1;
+            //         return 0;
+            //     });
+            // }
+            if (dogs[0].name !== 'Not founded dog') {
                 dogs = dogs.map(dog => {
                     if (dog.name === 'Smooth Fox Terrier') {
                         dog.weight = [6, 8];
@@ -148,9 +148,10 @@ export function getDogs(name) {
                     return dog;
                 });
             }
+            const action = orderDogs(dogs, order);
             dispatch({
                 type: GETDOGS,
-                payload: dogs
+                payload: action.payload
             })
         } catch (error) {
             console.log(error);

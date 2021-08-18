@@ -1,9 +1,11 @@
 import './index.css';
 import Dog from '../Dog';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Pages from '../Pages';
 import Filter from '../Filter';
 import Order from '../Order';
+import { useEffect } from 'react';
+import { orderDogs } from '../../../logic/actions';
 
 function Dogs() {
     const dogs = useSelector(state => state.dogs);
@@ -13,6 +15,11 @@ function Dogs() {
     const filter = useSelector(state => state.filter);
     const filtered = useSelector(state => state.filtered);
     const order = useSelector(state => state.order);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(orderDogs(dogs, order))
+    }, [])
 
     const pages = Math.ceil(dogs.length/9);
     const filteredPages = Math.ceil(filtered.length/9);

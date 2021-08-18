@@ -6,13 +6,14 @@ import SearchButtons from '../SearchButtons';
 function Search() {
     const dispatch = useDispatch();
     const search = useSelector(state => state.search);
+    const order = useSelector(state => state.order);
 
     const handleClickSearch = () => {
-        dispatch(getDogs(search));
+        dispatch(getDogs(search, order));
     }
     const handleKeyDown = event => {
         if (event.keyCode === 13) {
-            dispatch(getDogs(search));
+            dispatch(getDogs(search, order));
         }
     }
     const handleChange = event => {
