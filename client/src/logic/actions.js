@@ -12,6 +12,9 @@ export const SETFILTER = 'SETFILTER';
 export const SETFILTERED = 'SETFILTERED';
 export const HIDEOPTIONS = 'HIDEOPTIONS';
 export const CLEANDOGS = 'CLEANDOGS';
+export const SETORDER = 'SETORDER';
+export const ORDERDOGS = 'ORDERDOGS';
+export const ORDERFILTERED = 'ORDERFILTERED';
 
 export function isLog(payload) {
     return {
@@ -72,6 +75,44 @@ export function cleanDogs() {
     }
 }
 
+export function setOrder(payload) {
+    return {
+        type: SETORDER,
+        payload
+    }
+}
+
+export function orderDogs(dogs, order) {
+    if (dogs.length > 1) {
+        dogs.sort((a, b) => {
+            const type = order[0];
+            const dir = order[1]
+            if (type === 'name') {
+                if (a[type] > b[type]) return dir === 'upward' ? 1 : -1;
+                if (a[type] < b[type]) return dir === 'upward' ? -1 : 1;
+                return 0;
+            } else {
+                if (a[type][0] === b[type][0]) {
+                    return dir === 'upward' ?  a[type][1] - b[type][1] : b[type][1] - a[type][1];
+                }
+                return dir === 'upward' ? a[type][0] - b[type][0] : b[type][0] - a[type][0];
+            }
+        });
+    }
+    return {
+        type: ORDERDOGS,
+        payload: dogs
+    }
+}
+
+export function orderFiltered(dogs, order) {
+    const action = orderDogs(dogs, order);
+    return {
+        type: ORDERFILTERED,
+        payload: action.payload
+    }
+}
+
 export function getDogs(name) {
     return async dispatch => {
         try {
@@ -84,6 +125,26 @@ export function getDogs(name) {
                     urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
                 }];
             }
+            if (dogs.length > 1) {
+                dogs.sort((a, b) => {
+                    if (a.name > b.name) return 1;
+                    if (a.name < b.name) return -1;
+                    return 0;
+                });
+            }
+            dogs = dogs.map(dog => {
+                if (dog.name === 'Smooth Fox Terrier') {
+                    dog.weight = [6, 8];
+                    return dog;
+                }
+                if (dog.name === 'Olde English Bulldogge') {
+                    dog.weight = [20, 30];
+                    return dog;
+                }
+                const array = dog.weight.split(' - ');
+                dog.weight = [parseInt(array[0]), parseInt(array[1])]
+                return dog;
+            });
             dispatch({
                 type: GETDOGS,
                 payload: dogs

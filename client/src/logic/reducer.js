@@ -1,4 +1,4 @@
-import { ISLOG, GETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, TOGGLEORDER, SETFILTER, SETFILTERED, HIDEOPTIONS, CLEANDOGS } from './actions';
+import { ISLOG, GETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, TOGGLEORDER, SETFILTER, SETFILTERED, HIDEOPTIONS, CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED } from './actions';
 
 const initialState = {
     isLoggedIn: '',
@@ -9,7 +9,8 @@ const initialState = {
     showFilter: false,
     showOrder: false,
     filter: 'all',
-    filtered: []
+    filtered: [],
+    order: ['name', 'upward']
 }
 
 function reducer(state = initialState, action) {
@@ -49,8 +50,18 @@ function reducer(state = initialState, action) {
                 showFilter: false,
                 showOrder: false,
                 filter: 'all',
-                filtered: []
+                filtered: [],
+                order: ['name', 'upward']
             };
+
+        case SETORDER:
+            return {...state, order: action.payload};
+
+        case ORDERDOGS:
+            return {...state, dogs: action.payload};
+
+        case ORDERFILTERED:
+            return {...state, filtered: action.payload};    
 
         default:
             return state;
