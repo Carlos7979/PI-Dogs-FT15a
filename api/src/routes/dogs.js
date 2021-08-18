@@ -90,7 +90,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        if (!Number.isNaN(id)) {
+        if (Number.isNaN(parseInt(id))) {
             const response = await Dog.findByPk(id, {
                 include: Temperament
             });
