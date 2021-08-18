@@ -1,6 +1,6 @@
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { hideOptions, toggleFilter, toggleOrder } from '../../../logic/actions';
+import { cleanDogs, hideOptions, toggleFilter, toggleOrder } from '../../../logic/actions';
 
 function SearchButtons({handleClickSearch}) {
     const dogs = useSelector(state => state.dogs);
@@ -12,9 +12,13 @@ function SearchButtons({handleClickSearch}) {
     const handleClickFilter = () => {
         dispatch(toggleFilter());
     }
+    const handleClickClean = () => {
+        dispatch(cleanDogs());
+    }
     return (
         <div className="searchButtons">
-            <button type="submit" onClick={handleClickSearch}>Search</button>
+            <button onClick={handleClickSearch}>Search</button>
+            {dogs.length > 0 && <button className="center" onClick={handleClickClean}>Clean</button>}
             {dogs.length > 1 && <button className="center" onClick={handleClickOrder}>Order</button>}
             {dogs.length > 1 && <button onClick={handleClickFilter}>Filter</button>}
         </div>

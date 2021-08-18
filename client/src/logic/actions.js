@@ -11,6 +11,7 @@ export const TOGGLEORDER = 'TOGGLEORDER';
 export const SETFILTER = 'SETFILTER';
 export const SETFILTERED = 'SETFILTERED';
 export const HIDEOPTIONS = 'HIDEOPTIONS';
+export const CLEANDOGS = 'CLEANDOGS';
 
 export function isLog(payload) {
     return {
@@ -62,6 +63,12 @@ export function setFiltered(payload) {
 export function hideOptions() {
     return {
         type: HIDEOPTIONS
+    }
+}
+
+export function cleanDogs() {
+    return {
+        type: CLEANDOGS
     }
 }
 
