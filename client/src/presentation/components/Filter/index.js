@@ -16,7 +16,7 @@ function Filter({dogs, filter}) {
         }
     }
     temperamentsInDogs.sort().unshift('All');
-    const handleChange = event=> {
+    const handleChange = event => {
         const value = event.target.value;
         const filtered = [];
         dispatch(setFilter(value));
@@ -29,6 +29,7 @@ function Filter({dogs, filter}) {
     }
     return (
         <div className="filter">
+            <span>Filter by temperament</span>
             <select value={filter} onChange={handleChange}>
                 {temperamentsInDogs.map((temperament, index) => {
                     return <option key={`filter-${index}`}>{temperament}</option>

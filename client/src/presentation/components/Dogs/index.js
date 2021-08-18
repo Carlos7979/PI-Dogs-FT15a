@@ -24,9 +24,9 @@ function Dogs() {
     }
     return (
         <div>
+            {((!filteredPages && pages > 1) || filteredPages > 1) && <Pages page={page} pages={filteredPages || pages}/>}
             {showOrder && <Order/>}
             {showFilter && <Filter dogs={dogs} filter={filter}/>}
-            {((!filteredPages && pages > 1) || filteredPages > 1) && <Pages page={page} pages={filteredPages || pages}/>}
             <div className="dogs">
                 {handlePages(dogs, page, filtered).map((dog, index) => {
                     return <Dog dog={dog} key={index}/>
