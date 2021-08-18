@@ -1,9 +1,9 @@
 import './index.css';
 
-function Temperaments({temperaments}) {
+function Temperaments({id, temperaments}) {
     return (
-        <div className="temperaments">
-            <span className="title">Temperament:</span> {temperaments ? temperaments.toLowerCase() : <span>not registered</span>}.
+        <div id={`temperament-${id}`} className="temperaments">
+            <span id={`temperamentSpan1-${id}`} className="title">Temperament:</span> {temperaments ? temperaments.toLowerCase() : <span id={`temperamentSpan2-${id}`}>not registered</span>}.
         </div>
     )
 }

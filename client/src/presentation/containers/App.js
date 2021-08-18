@@ -7,17 +7,17 @@ import Detail from './pages/Detail';
 import Nav from '../components/Nav';
 import Header from '../components/Header';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLog } from '../../logic/actions';
 
 function App() {
 
   const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (sessionStorage.login) {
-
-  //   }
-  // });
+  useEffect(() => {
+    dispatch(isLog(sessionStorage.login));;
+  });
 
   const handleLogin = () => {
     sessionStorage.login = true;
@@ -26,7 +26,7 @@ function App() {
   const handleLogout = () => {
     sessionStorage.login = '';
   }
-
+  console.log(sessionStorage.login);
   return (
     <div className="App">
       {!sessionStorage.login && <h1 className="appTitle">Henry Dogs</h1>}

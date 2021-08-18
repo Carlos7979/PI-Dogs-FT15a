@@ -1,8 +1,8 @@
 import './index.css';
 
-function Name({name}) {
+function Name({id, name}) {
     return (
-        <div className="name">
+        <div id={`name-${id}`} className="name">
             {name}
         </div>
     )

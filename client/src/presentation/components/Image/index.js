@@ -1,10 +1,10 @@
 import './index.css'
 
 function Image(props) {
-    const { src, alt } = props;
+    const { id, src, alt } = props;
     return (
-        <div>
-            <img src={src} alt={alt}/>
+        <div id={`imgage-${id}`}>
+            <img id={`img-${id}`} src={src} alt={alt}/>
         </div>
     )
 }

@@ -15,6 +15,7 @@ export const CLEANDOGS = 'CLEANDOGS';
 export const SETORDER = 'SETORDER';
 export const ORDERDOGS = 'ORDERDOGS';
 export const ORDERFILTERED = 'ORDERFILTERED';
+export const GETDOG = 'GETDOG';
 
 export function isLog(payload) {
     return {
@@ -148,6 +149,35 @@ export function getDogs(name) {
             dispatch({
                 type: GETDOGS,
                 payload: dogs
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+}
+
+export function getDog(id) {
+    return async dispatch => {
+        try {
+            let path = '/dogs';
+            if (id) path = path + `/${id}`;
+            let dog = await call(`${url}${path}`);
+            if (dog.status === 404) {
+                dog = [{
+                    id: 'Not founded dog',
+                    urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
+                }];
+            }
+            if (dog.name === 'Smooth Fox Terrier') {
+                dog.weight = '6 - 8';
+            }
+            if (dog.name === 'Olde English Bulldogge') {
+                dog.weight = '20 - 30';
+            }
+            dispatch({
+                type: GETDOG,
+                payload: dog
             })
         } catch (error) {
             console.log(error);
