@@ -120,11 +120,14 @@ function Form() {
         if (selectedTemperaments.length > 0) body.temperaments = selectedTemperaments;
         dispatch(setErrors(validate(body)));
     }
-    const handleClick = () => {
+    const handleClickCreate = () => {
         dispatch(cleanNew());
         dispatch(postDog(body));
-        
     }
+    const handleClickClear = () => {
+        dispatch(cleanCreate());
+    }
+
     return (
         <div className="form">
 			<Input type="text" name="name" value={breed} handleInputChange={handleChange}/>
@@ -136,7 +139,8 @@ function Form() {
             {selectedTemperaments.length > 0 && <Selected array={selectedTemperaments} />}
             <div className="requiredMessage">* Required fields</div>
             {(Object.keys(errors).length > 0 && errors.error !== 0) && <Errors errors={Object.values(errors)} />}
-            <button disabled={Object.keys(errors).length > 0} onClick={handleClick} >Create</button>
+            <button disabled={Object.keys(errors).length > 0} onClick={handleClickCreate} >Create</button>
+            <button onClick={handleClickClear} >Clear fields</button>
         </div>
     )
 }

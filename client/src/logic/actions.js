@@ -301,6 +301,7 @@ export function getDog(id) {
             if (dog.name === 'Olde English Bulldogge') {
                 dog.weight = '20 - 30';
             }
+            if (!dog.urlImage) dog.urlImage = "https://agencias.assist1.com.co/assets/images/no-image.png";
             dispatch({
                 type: GETDOG,
                 payload: dog

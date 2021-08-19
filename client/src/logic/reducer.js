@@ -28,7 +28,7 @@ const initialState = {
 function reducer(state = initialState, action) {
     switch (action.type) {
         case ISLOG:
-            return { ...initialState, isLoggedIn: action.payload};
+            return { ...initialState, height: ['', ''], lifeSpan: ['', ''], weight: ['', ''], selectedTemperaments: [], isLoggedIn: action.payload};
 
         case GETDOGS:
             return {...state, page: 1, filter: 'all', filtered: [], dogs: action.payload};
@@ -107,7 +107,19 @@ function reducer(state = initialState, action) {
             return {...state, body: action.payload};
 
         case POSTDOG:
-            return {...state, new: action.payload};
+            return {
+                ...state, 
+                new: action.payload,
+                breed: '', 
+                height: ['', ''], 
+                weight: ['', ''],
+                lifeSpan: ['', ''], 
+                urlImage: '', 
+                temperamentsToSelect: [], 
+                selectedTemperaments: [],
+                errors: {error: 0},
+                body: {}
+            };
 
         case CLEANCREATE:
             return {

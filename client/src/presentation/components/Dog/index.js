@@ -16,8 +16,8 @@ function Dog({dog}) {
         const splitted = target.id.split('-');
         // if (splitted.length === 2) console.log(splitted[1]);
         splitted.shift();
-        console.log(splitted.join('-'));
-        console.log(id);
+        // console.log(splitted.join('-'));
+        // console.log(id);
         history.push(`/detail`);
         // history.push(`/detail/${id}`);
         dispatch(getDog(id));
