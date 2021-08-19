@@ -19,6 +19,7 @@ function Dog({dog}) {
         console.log(splitted.join('-'));
         console.log(id);
         history.push(`/detail`);
+        // history.push(`/detail/${id}`);
         dispatch(getDog(id));
     }
     return (

@@ -61,6 +61,10 @@ function App() {
           path='/detail'
           render={() => <Detail/>}>
         </Route>
+        {/* <Route
+          path='/detail/:id'
+          render={({match}) => <Detail id={match.params.id}/>}>
+        </Route> */}
         <Redirect to="/"/>
       </Switch>
     </div>

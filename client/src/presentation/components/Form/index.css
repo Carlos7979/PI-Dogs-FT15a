@@ -1,0 +1,12 @@
+.form {
+    width: 90%;
+    border: black solid 1px;
+    border-radius: 5px;
+    margin: 0 auto;
+    height: 75%;
+}
+
+.requiredMessage {
+    font-size: small;
+    margin-bottom: 5px;
+}
