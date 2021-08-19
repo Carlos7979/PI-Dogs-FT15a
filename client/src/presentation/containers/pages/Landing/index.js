@@ -1,18 +1,17 @@
 import './index.css';
-import { useDispatch } from 'react-redux';
-import { isLog } from '../../../../logic/actions'
+import { useDispatch, useSelector } from 'react-redux';
+import { getDogs, isLog } from '../../../../logic/actions'
 
 function Landing(props) {
+    const order = useSelector(state => state.order);
     const dispatch = useDispatch();
     const handleClick = () => {
         props.login();
         dispatch(isLog(true));
+        dispatch(getDogs(undefined, order));
     }
     return (
         <section className="landing">
-            {/* <div className="landing-title">
-                Landing page
-            </div> */}
             <button className="logginButton" onClick={handleClick}>
                 Log in
             </button>
