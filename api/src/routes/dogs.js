@@ -7,6 +7,11 @@ const router = Router();
 router.post('/', bodyValidator, async (req, res, next) => {
     try {
         const { name, height, weight, lifeSpan, urlImage, temperaments } = req.body;
+        const response = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`);
+        const dogs = response.data;
+        if (dogs.length > 0 && dogs.some(dog => dog.name.toLowerCase() === name)) {
+            return res.status(404).json({error: 'Breed name already exists'});
+        }
         const dog = await Dog.create({
             name, height, weight, lifeSpan, urlImage
         });
