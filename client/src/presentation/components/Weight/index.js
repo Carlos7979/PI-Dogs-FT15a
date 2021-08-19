@@ -3,7 +3,7 @@ import './index.css';
 function Weight({weight}) {
     return (
         <div  className="isDetail">
-			<span className="title">Weight:</span> {weight ? `${weight} Kg` : <span >not registered</span>}.
+			<span className="sub-title">Weight:</span> {weight ? `${weight} Kg` : <span >not registered</span>}.
         </div>
     )
 }
