@@ -1,6 +1,6 @@
 import call from '../data/dogs-api';
 
-const url = 'http://localhost:3001/api-dogs/';
+const url = 'http://localhost:3001/api-dogs';
 
 export const ISLOG = 'ISLOG';
 export const GETDOGS = 'GETDOGS';
