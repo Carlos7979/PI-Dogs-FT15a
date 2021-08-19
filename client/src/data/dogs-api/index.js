@@ -1,5 +1,4 @@
-// import { axios } from 'common';
-const { axios } = require('common');
+import { axios } from 'common';
 
 function call(url, options = {}) {
     const { method = 'GET', body } = options;
@@ -23,5 +22,4 @@ function call(url, options = {}) {
     })();
 }
 
-module.exports = call;
-// export default call;
+export default call;
