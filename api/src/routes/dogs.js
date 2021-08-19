@@ -95,14 +95,12 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        if (Number.isNaN(parseInt(id))) {
-            const response = await Dog.findByPk(id, {
-                include: Temperament
-            });
-            if (response) return res.json(dogToSendFromDB(response.dataValues));
-        }
-        const response = await axios.get('https://api.thedogapi.com/v1/breeds');
-        const dogs = response.data;
+        const responseDB = await Dog.findByPk(id, {
+            include: Temperament
+        });
+        if (responseDB) return res.json(dogToSendFromDB(responseDB.dataValues));
+        const responseApi = await axios.get('https://api.thedogapi.com/v1/breeds');
+        const dogs = responseApi.data;
         const dog = dogs.filter(dog => {
             return dog.id == id;
         });
