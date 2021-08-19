@@ -1,4 +1,11 @@
-import { ISLOG, GETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, TOGGLEORDER, SETFILTER, SETFILTERED, HIDEOPTIONS, CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED, GETDOG } from './actions';
+import { 
+    ISLOG, GETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, 
+    TOGGLEORDER, SETFILTER, SETFILTERED, HIDEOPTIONS, 
+    CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED, GETDOG, 
+    SETBREED, SETHEIGHT, SETWEIGHT, SETLIFESPAN, SETURLIMAGE, 
+    SETTEMPERAMENTSTOSELECT, SETSELECTEDTEMPERAMENTS, SETERRORS, 
+    SETBODY, POSTDOG, CLEANCREATE, CLEANNEW
+ } from './actions';
 
 const initialState = {
     isLoggedIn: '',
@@ -10,7 +17,12 @@ const initialState = {
     showOrder: false,
     filter: 'all',
     filtered: [],
-    order: ['name', 'upward']
+    order: ['name', 'upward'],
+    breed: '', height: ['', ''], weight: ['', ''],
+    lifeSpan: ['', ''], urlImage: '', temperamentsToSelect: [], selectedTemperaments: [],
+    errors: {error: 0},
+    body: {},
+    new: {}
 }
 
 function reducer(state = initialState, action) {
@@ -40,12 +52,13 @@ function reducer(state = initialState, action) {
             return {...state, page: 1, filtered: action.payload};
 
         case HIDEOPTIONS:
-            return {...state, showFilter: false, showOrder: false};  
+            return {...state, showFilter: false, showOrder: false};
 
         case CLEANDOGS:
             return {
-                ...state, dogs: [],
-                 page: 1,
+                ...state,
+                dogs: [],
+                page: 1,
                 search: '',
                 showFilter: false,
                 showOrder: false,
@@ -61,10 +74,58 @@ function reducer(state = initialState, action) {
             return {...state, dogs: action.payload};
 
         case ORDERFILTERED:
-            return {...state, filtered: action.payload};   
+            return {...state, filtered: action.payload};
             
         case GETDOG:
-            return {...state, dog: action.payload};   
+            return {...state, dog: action.payload};
+
+        case SETTEMPERAMENTSTOSELECT:
+            return {...state, temperamentsToSelect: action.payload};
+
+        case SETSELECTEDTEMPERAMENTS:
+            return {...state, selectedTemperaments: action.payload};
+        
+        case SETBREED:
+            return {...state, breed: action.payload};
+        
+        case SETHEIGHT:
+            return {...state, height: action.payload};
+
+        case SETWEIGHT:
+            return {...state, weight: action.payload};
+
+        case SETLIFESPAN:
+            return {...state, lifeSpan: action.payload};
+
+        case SETURLIMAGE:
+            return {...state, urlImage: action.payload};
+
+        case SETERRORS:
+            return {...state, errors: action.payload};
+
+        case SETBODY:
+            return {...state, body: action.payload};
+
+        case POSTDOG:
+            return {...state, new: action.payload};
+
+        case CLEANCREATE:
+            return {
+                ...state, 
+                breed: '', 
+                height: ['', ''], 
+                weight: ['', ''],
+                lifeSpan: ['', ''], 
+                urlImage: '', 
+                temperamentsToSelect: [], 
+                selectedTemperaments: [],
+                errors: {error: 0},
+                body: {}
+            };
+
+        case CLEANNEW:
+            return {...state, new: {}};
+        
 
         default:
             return state;

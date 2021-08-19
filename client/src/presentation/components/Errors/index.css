@@ -1,0 +1,7 @@
+.errors {
+    width: 40%;
+    border: red solid 2px;
+    border-radius: 5px;
+    margin: 15px auto;
+    padding: 10px;
+}

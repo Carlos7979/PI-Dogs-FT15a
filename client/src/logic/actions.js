@@ -16,6 +16,18 @@ export const SETORDER = 'SETORDER';
 export const ORDERDOGS = 'ORDERDOGS';
 export const ORDERFILTERED = 'ORDERFILTERED';
 export const GETDOG = 'GETDOG';
+export const SETBREED = 'SETBREED';
+export const SETHEIGHT = 'SETHEIGHT';
+export const SETWEIGHT = 'SETWEIGHT';
+export const SETLIFESPAN = 'SETLIFESPAN';
+export const SETURLIMAGE = 'SETURLIMAGE';
+export const SETTEMPERAMENTSTOSELECT = 'SETTEMPERAMENTSTOSELECT';
+export const SETSELECTEDTEMPERAMENTS = 'SETSELECTEDTEMPERAMENTS';
+export const SETERRORS = 'SETERRORS';
+export const SETBODY = 'SETBODY';
+export const POSTDOG = 'POSTDOG';
+export const CLEANCREATE = 'CLEANCREATE';
+export const CLEANNEW = 'CLEANNEW';
 
 export function isLog(payload) {
     return {
@@ -114,6 +126,123 @@ export function orderFiltered(dogs, order) {
     }
 }
 
+export function setBreed(payload) {
+    return {
+        type: SETBREED,
+        payload
+    }
+}
+
+export function setHeight(payload) {
+    return {
+        type: SETHEIGHT,
+        payload
+    }
+}
+
+export function setWeight(payload) {
+    return {
+        type: SETWEIGHT,
+        payload
+    }
+}
+
+export function setLifeSpan(payload) {
+    return {
+        type: SETLIFESPAN,
+        payload
+    }
+}
+
+export function setUrlImage(payload) {
+    return {
+        type: SETURLIMAGE,
+        payload
+    }
+}
+
+export function setSelectedTemperaments(payload) {
+    return {
+        type: SETSELECTEDTEMPERAMENTS,
+        payload
+    }
+}
+
+export function setErrors(payload) {
+    return {
+        type: SETERRORS,
+        payload
+    }
+}
+
+export function setBody(payload) {
+    return {
+        type: SETBODY,
+        payload
+    }
+}
+
+export function cleanCreate() {
+    return {
+        type: CLEANCREATE
+    }
+}
+
+export function cleanNew() {
+    return {
+        type: CLEANNEW
+    }
+}
+
+export function postDog(body) {
+    return async dispatch => {
+        try {
+            let path = '/dogs';
+            const response = await call(`${url}${path}`, {method: 'POST', body});
+            // console.log(response);
+            if (body.name === response.name) {
+                dispatch({
+                    type: POSTDOG,
+                    payload: response
+                })
+            } else {
+                dispatch({
+                    type: SETERRORS,
+                    payload: {
+                        message: 'Breed name already exists'
+                    }
+                })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+export function setTemperamentsToSelect() {
+    return async dispatch => {
+        try {
+            let path = '/temperaments';
+            const response = await call(`${url}${path}`);
+            const temperaments = [];
+            if (response.length > 0) {
+                for (const temperament of response) {
+                    if (temperament.temperament) {
+                        temperaments.push(temperament.temperament);
+                    }
+                }
+            }
+            temperaments.sort();
+            dispatch({
+                type: SETTEMPERAMENTSTOSELECT,
+                payload: temperaments
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
 export function getDogs(name, order) {
     return async dispatch => {
         try {
@@ -126,13 +255,6 @@ export function getDogs(name, order) {
                     urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
                 }];
             }
-            // if (dogs.length > 1) {
-            //     dogs.sort((a, b) => {
-            //         if (a.name > b.name) return 1;
-            //         if (a.name < b.name) return -1;
-            //         return 0;
-            //     });
-            // }
             if (dogs[0].name !== 'Not founded dog') {
                 dogs = dogs.map(dog => {
                     if (dog.name === 'Smooth Fox Terrier') {
@@ -144,7 +266,8 @@ export function getDogs(name, order) {
                         return dog;
                     }
                     const array = dog.weight.split(' - ');
-                    dog.weight = [parseInt(array[0]), parseInt(array[1])]
+                    dog.weight = [parseInt(array[0]), parseInt(array[1])];
+                    if (!dog.urlImage) dog.urlImage = "https://agencias.assist1.com.co/assets/images/no-image.png";
                     return dog;
                 });
             }
@@ -167,10 +290,10 @@ export function getDog(id) {
             if (id) path = path + `/${id}`;
             let dog = await call(`${url}${path}`);
             if (dog.status === 404) {
-                dog = [{
+                dog = {
                     id: 'Not founded dog',
                     urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
-                }];
+                };
             }
             if (dog.name === 'Smooth Fox Terrier') {
                 dog.weight = '6 - 8';

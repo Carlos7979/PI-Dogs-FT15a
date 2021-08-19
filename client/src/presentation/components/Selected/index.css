@@ -1,0 +1,6 @@
+.selected-container {
+    margin: 15px auto;
+    border: black solid 1px;
+    border-radius: 5px;
+    width: 40%;
+}
