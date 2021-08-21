@@ -95,10 +95,13 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
-        const responseDB = await Dog.findByPk(id, {
-            include: Temperament
-        });
-        if (responseDB) return res.json(dogToSendFromDB(responseDB.dataValues));
+
+        if (!Number.isInteger(Number(id))) {
+            const responseDB = await Dog.findByPk(id, {
+                include: Temperament
+            });
+            if (responseDB) return res.json(dogToSendFromDB(responseDB.dataValues));
+        }
         const responseApi = await axios.get('https://api.thedogapi.com/v1/breeds');
         const dogs = responseApi.data;
         const dog = dogs.filter(dog => {
