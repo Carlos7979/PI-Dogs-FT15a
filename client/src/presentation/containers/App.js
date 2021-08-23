@@ -4,7 +4,6 @@ import Landing from './pages/Landing';
 import Home from './pages/Home';
 import Create from './pages/Create';
 import Detail from './pages/Detail';
-import Nav from '../components/Nav';
 import Header from '../components/Header';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(isLog(sessionStorage.login));;
+    dispatch(isLog(sessionStorage.login));
   }, []);
 
   const handleLogin = () => {
