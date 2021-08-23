@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Name from '../../../components/Name';
 import Image from '../../../components/Image';
 import Temperaments from '../../../components/Temperaments';
-import Height from '../../Height';
+import Height from '../../../components/Height';
 import Weight from '../../../components/Weight';
 import LifeSpan from '../../../components/LifeSpan';
 
