@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(isLog(sessionStorage.login));;
-  });
+  }, []);
 
   const handleLogin = () => {
     sessionStorage.login = true;
