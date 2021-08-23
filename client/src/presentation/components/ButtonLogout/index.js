@@ -10,7 +10,7 @@ function ButtonLogout(props) {
     }
     return (
         <button onClick={handleClick}>
-            Log out
+            Leave
         </button>
     )
 }

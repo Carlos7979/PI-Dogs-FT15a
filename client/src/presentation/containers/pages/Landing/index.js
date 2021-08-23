@@ -13,7 +13,7 @@ function Landing(props) {
     return (
         <section className="landing">
             <button className="logginButton" onClick={handleClick}>
-                Log in
+                Go
             </button>
         </section>
     )
