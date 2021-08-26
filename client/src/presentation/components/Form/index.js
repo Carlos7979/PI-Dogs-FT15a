@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanCreate, cleanNew, postDog, setBody, setBreed, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setTemperamentsToSelect, setUrlImage, setWeight } from '../../../logic/actions';
+import { useHistory } from 'react-router-dom';
+import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setTemperamentsToSelect, setUrlImage, setWeight } from '../../../logic/actions';
 import Errors from '../Errors';
 import Input from '../Input';
 import Selected from '../Selected';
@@ -54,8 +56,17 @@ function Form() {
     const urlImage = useSelector(state => state.urlImage);
     const errors = useSelector(state => state.errors);
     const body = useSelector(state => state.body);
-    // const newDog = useSelector(state => state.new);
+
+    const newDog = useSelector(state => state.new);
     const dispatch = useDispatch();
+    const history = useHistory();
+    useEffect(() => {
+        if (newDog.id) {
+            dispatch(setDog(newDog.id));
+            history.push(`/detail`);
+        }
+    }, [newDog]);
+
     const handleChange = event => {
         const target = event.target;
         const name = target.name;
@@ -122,7 +133,7 @@ function Form() {
     }
     const handleClickCreate = () => {
         dispatch(cleanNew());
-        dispatch(postDog(body));
+        dispatch(createDog(body));
     }
     const handleClickClear = () => {
         dispatch(cleanCreate());

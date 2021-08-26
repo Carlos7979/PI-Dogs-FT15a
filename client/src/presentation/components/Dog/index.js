@@ -4,7 +4,7 @@ import Temperaments from '../Temperaments';
 import Name from '../Name';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { getDog } from '../../../logic/actions';
+import { setDog } from '../../../logic/actions';
 
 function Dog({dog}) {
     const { id, name, urlImage, temperament } = dog;
@@ -14,13 +14,10 @@ function Dog({dog}) {
         if(dog.name === 'Not founded dog') return;
         const target = event.target;
         const splitted = target.id.split('-');
-        // if (splitted.length === 2) console.log(splitted[1]);
         splitted.shift();
-        // console.log(splitted.join('-'));
-        // console.log(id);
         history.push(`/detail`);
         // history.push(`/detail/${id}`);
-        dispatch(getDog(id));
+        dispatch(setDog(id));
     }
     return (
         <div id={`dog-${id}`} className="dog" onClick={handleClick} >

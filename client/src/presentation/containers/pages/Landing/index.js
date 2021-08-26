@@ -1,6 +1,6 @@
 import './index.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, isLog } from '../../../../logic/actions'
+import { setDogs, isLog } from '../../../../logic/actions'
 
 function Landing({login}) {
     const order = useSelector(state => state.order);
@@ -8,13 +8,13 @@ function Landing({login}) {
     const handleClick = () => {
         login();
         dispatch(isLog(true));
-        dispatch(getDogs(undefined, order));
+        dispatch(setDogs(undefined, order));
     }
     const handleKeyDown = event => {
         if (event.keyCode === 13) {
             login();
             dispatch(isLog(true));
-            dispatch(getDogs(undefined, order));
+            dispatch(setDogs(undefined, order));
         }
     }
     return (

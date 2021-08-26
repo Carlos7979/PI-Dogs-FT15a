@@ -1,9 +1,8 @@
-import call from '../data/dogs-api';
-
-const url = 'http://localhost:3001/api-dogs';
+import dogsApi from '../data/dogs-api';
+const { getTemperaments, postDog, getDogs, getDog } = dogsApi
 
 export const ISLOG = 'ISLOG';
-export const GETDOGS = 'GETDOGS';
+export const SETDOGS = 'SETDOGS';
 export const SETPAGE = 'SETPAGE';
 export const SEARCH = 'SEARCH';
 export const TOGGLEFILTER = 'TOGGLEFILTER';
@@ -15,7 +14,7 @@ export const CLEANDOGS = 'CLEANDOGS';
 export const SETORDER = 'SETORDER';
 export const ORDERDOGS = 'ORDERDOGS';
 export const ORDERFILTERED = 'ORDERFILTERED';
-export const GETDOG = 'GETDOG';
+export const SETDOG = 'SETDOG';
 export const SETBREED = 'SETBREED';
 export const SETHEIGHT = 'SETHEIGHT';
 export const SETWEIGHT = 'SETWEIGHT';
@@ -25,7 +24,7 @@ export const SETTEMPERAMENTSTOSELECT = 'SETTEMPERAMENTSTOSELECT';
 export const SETSELECTEDTEMPERAMENTS = 'SETSELECTEDTEMPERAMENTS';
 export const SETERRORS = 'SETERRORS';
 export const SETBODY = 'SETBODY';
-export const POSTDOG = 'POSTDOG';
+export const CREATEDOG = 'CREATEDOG';
 export const CLEANCREATE = 'CLEANCREATE';
 export const CLEANNEW = 'CLEANNEW';
 
@@ -194,15 +193,13 @@ export function cleanNew() {
     }
 }
 
-export function postDog(body) {
+export function createDog(body) {
     return async dispatch => {
         try {
-            let path = '/dogs';
-            const response = await call(`${url}${path}`, {method: 'POST', body});
-            // console.log(response);
+            const response = await postDog(body);
             if (body.name === response.name) {
                 dispatch({
-                    type: POSTDOG,
+                    type: CREATEDOG,
                     payload: response
                 })
             } else {
@@ -222,17 +219,7 @@ export function postDog(body) {
 export function setTemperamentsToSelect() {
     return async dispatch => {
         try {
-            let path = '/temperaments';
-            const response = await call(`${url}${path}`);
-            const temperaments = [];
-            if (response.length > 0) {
-                for (const temperament of response) {
-                    if (temperament.temperament) {
-                        temperaments.push(temperament.temperament);
-                    }
-                }
-            }
-            temperaments.sort();
+            const temperaments = await getTemperaments();
             dispatch({
                 type: SETTEMPERAMENTSTOSELECT,
                 payload: temperaments
@@ -243,37 +230,13 @@ export function setTemperamentsToSelect() {
     }
 }
 
-export function getDogs(name, order) {
+export function setDogs(name, order) {
     return async dispatch => {
         try {
-            let path = '/dogs';
-            if (name) path = path + `?name=${name}`;
-            let dogs = await call(`${url}${path}`);
-            if (dogs.status === 404) {
-                dogs = [{
-                    name: 'Not founded dog',
-                    urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
-                }];
-            }
-            if (dogs[0].name !== 'Not founded dog') {
-                dogs = dogs.map(dog => {
-                    if (dog.name === 'Smooth Fox Terrier') {
-                        dog.weight = [6, 8];
-                        return dog;
-                    }
-                    if (dog.name === 'Olde English Bulldogge') {
-                        dog.weight = [20, 30];
-                        return dog;
-                    }
-                    const array = dog.weight.split(' - ');
-                    dog.weight = [parseInt(array[0]), parseInt(array[1])];
-                    if (!dog.urlImage) dog.urlImage = "https://agencias.assist1.com.co/assets/images/no-image.png";
-                    return dog;
-                });
-            }
+            const dogs = await getDogs(name);
             const action = orderDogs(dogs, order);
             dispatch({
-                type: GETDOGS,
+                type: SETDOGS,
                 payload: action.payload
             })
         } catch (error) {
@@ -283,27 +246,12 @@ export function getDogs(name, order) {
     
 }
 
-export function getDog(id) {
+export function setDog(id) {
     return async dispatch => {
         try {
-            let path = '/dogs';
-            if (id) path = path + `/${id}`;
-            let dog = await call(`${url}${path}`);
-            if (dog.status === 404) {
-                dog = {
-                    id: 'Not founded dog',
-                    urlImage: 'https://cdn.dribbble.com/users/4308506/screenshots/7807480/media/aabcdbc8ede7a673512a6646ce815245.png'
-                };
-            }
-            if (dog.name === 'Smooth Fox Terrier') {
-                dog.weight = '6 - 8';
-            }
-            if (dog.name === 'Olde English Bulldogge') {
-                dog.weight = '20 - 30';
-            }
-            if (!dog.urlImage) dog.urlImage = "https://agencias.assist1.com.co/assets/images/no-image.png";
+            const dog = await getDog(id);
             dispatch({
-                type: GETDOG,
+                type: SETDOG,
                 payload: dog
             })
         } catch (error) {
@@ -312,17 +260,3 @@ export function getDog(id) {
     }
     
 }
-
-// export function getDogs() {
-//     return function (dispatch) {
-//         return call(`${url}/dogs`)
-//             // .then(response => console.log(response))
-//             .then(response => {
-//                 dispatch({
-//                     type: GETDOGS,
-//                     payload: response
-//                 })
-//             })
-//             .catch(error => console.log(error))
-//     }
-// }

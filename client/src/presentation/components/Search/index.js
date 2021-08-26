@@ -1,5 +1,5 @@
 import './index.css'
-import { getDogs, searchDogs } from '../../../logic/actions'
+import { setDogs, searchDogs } from '../../../logic/actions'
 import { useDispatch, useSelector } from 'react-redux';
 import SearchButtons from '../SearchButtons';
 
@@ -9,11 +9,11 @@ function Search() {
     const order = useSelector(state => state.order);
 
     const handleClickSearch = () => {
-        dispatch(getDogs(search, order));
+        dispatch(setDogs(search, order));
     }
     const handleKeyDown = event => {
         if (event.keyCode === 13) {
-            dispatch(getDogs(search, order));
+            dispatch(setDogs(search, order));
         }
     }
     const handleChange = event => {

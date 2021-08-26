@@ -1,10 +1,10 @@
 import { 
-    ISLOG, GETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, 
+    ISLOG, SETDOGS, SETPAGE, SEARCH, TOGGLEFILTER, 
     TOGGLEORDER, SETFILTER, SETFILTERED, HIDEOPTIONS, 
-    CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED, GETDOG, 
+    CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED, SETDOG, 
     SETBREED, SETHEIGHT, SETWEIGHT, SETLIFESPAN, SETURLIMAGE, 
     SETTEMPERAMENTSTOSELECT, SETSELECTEDTEMPERAMENTS, SETERRORS, 
-    SETBODY, POSTDOG, CLEANCREATE, CLEANNEW
+    SETBODY, CREATEDOG, CLEANCREATE, CLEANNEW
  } from './actions';
 
 const initialState = {
@@ -30,7 +30,7 @@ function reducer(state = initialState, action) {
         case ISLOG:
             return { ...initialState, height: ['', ''], lifeSpan: ['', ''], weight: ['', ''], selectedTemperaments: [], isLoggedIn: action.payload};
 
-        case GETDOGS:
+        case SETDOGS:
             return {...state, page: 1, filter: 'all', filtered: [], dogs: action.payload};
 
         case SETPAGE:
@@ -76,7 +76,7 @@ function reducer(state = initialState, action) {
         case ORDERFILTERED:
             return {...state, filtered: action.payload};
             
-        case GETDOG:
+        case SETDOG:
             return {...state, dog: action.payload};
 
         case SETTEMPERAMENTSTOSELECT:
@@ -106,7 +106,7 @@ function reducer(state = initialState, action) {
         case SETBODY:
             return {...state, body: action.payload};
 
-        case POSTDOG:
+        case CREATEDOG:
             return {
                 ...state, 
                 new: action.payload,
