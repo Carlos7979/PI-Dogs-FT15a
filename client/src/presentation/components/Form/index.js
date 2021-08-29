@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { bodyValidate, bodyInputs } from '../../../controller';
+import { bodyValidate, bodyConstructor } from '../../../controller';
 import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight } from '../../../logic/actions';
 import Errors from '../Errors';
 import InputMultiSelect from '../InputMultiSelect';
@@ -9,8 +9,6 @@ import InputSelectRange from '../InputSelectRange';
 import InputText from '../InputText';
 import Selected from '../Selected';
 import './index.css';
-
-const actions = { setBreed, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight };
 
 function Form() {
     const temperamentsToSelect = useSelector(state => state.temperamentsToSelect);
@@ -35,7 +33,9 @@ function Form() {
 
     const handleChange = event => {
         const target = event.target;
-        const body = bodyInputs(actions, dispatch, target, breed, height, weight, lifeSpan, urlImage, selectedTemperaments);
+        const actions = { setBreed, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight };
+        const bodyInputs = { breed, height, weight, lifeSpan, urlImage, selectedTemperaments }
+        const body = bodyConstructor(actions, dispatch, target, bodyInputs);
         dispatch(setErrors(bodyValidate(body, setBody, dispatch)));
     }
     const handleClickCreate = () => {

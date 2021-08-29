@@ -1,7 +1,7 @@
 import bodyValidate from './bodyValidate';
-import bodyInputs from './bodyInputs';
+import bodyConstructor from './bodyConstructor';
 
 export {
     bodyValidate,
-    bodyInputs
+    bodyConstructor
 };

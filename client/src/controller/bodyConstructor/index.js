@@ -1,9 +1,11 @@
-function bodyInputs(actions, dispatch, target, breed, height, weight, lifeSpan, urlImage, selectedTemperaments) {
+function bodyConstructor(actions, dispatch, target, bodyInputs) {
     const { setBreed, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight } = actions;
+    const { height, weight, lifeSpan, urlImage, selectedTemperaments } = bodyInputs;
+    let breed = bodyInputs.breed;
     const name = target.name;
     const value = target.value;
     switch (name) {
-        case 'temperaments':
+        case 'selectedTemperaments':
             if (value) {
                 selectedTemperaments.push(value);
                 dispatch(setSelectedTemperaments([...selectedTemperaments]));
@@ -63,4 +65,4 @@ function bodyInputs(actions, dispatch, target, breed, height, weight, lifeSpan, 
     return body;
 }
 
-export default bodyInputs;
+export default bodyConstructor;

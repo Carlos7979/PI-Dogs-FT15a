@@ -130,7 +130,6 @@ function reducer(state = initialState, action) {
                 weight: ['', ''],
                 lifeSpan: ['', ''], 
                 urlImage: '', 
-                temperamentsToSelect: [], 
                 selectedTemperaments: [],
                 errors: {error: 0},
                 body: {}
