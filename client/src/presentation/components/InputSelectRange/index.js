@@ -1,13 +1,10 @@
 import './index.css';
 
-function InputSelectRange({name, value, handleInputChange, max, units, optional}) {
-    let nameToShow;
-    if (name) {
+function InputSelectRange({name, value, handleInputChange, max, units, optional, nameToShow}) {
+    if (name && !nameToShow) {
         const toUpperCase = name.split('');
         toUpperCase[0] = toUpperCase[0].toUpperCase();
         nameToShow = toUpperCase.join('');
-        if (nameToShow === 'LifeSpan') nameToShow = 'Life span';
-        if (nameToShow === 'UrlImage') nameToShow = 'Url image';
     }
     let maxArray;
     if(max) {

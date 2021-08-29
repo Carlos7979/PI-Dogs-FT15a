@@ -18,8 +18,9 @@ const initialState = {
     filter: 'all',
     filtered: [],
     order: ['name', 'upward'],
-    breed: '', height: ['', ''], weight: ['', ''],
-    lifeSpan: ['', ''], urlImage: '', temperamentsToSelect: [], selectedTemperaments: [],
+    temperamentsToSelect: [],
+    breed: '', height: ['', ''], weight: ['', ''], lifeSpan: ['', ''],
+    urlImage: '', selectedTemperaments: [],
     errors: {error: 0},
     body: {},
     new: {}

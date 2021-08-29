@@ -1,13 +1,10 @@
 import './index.css';
 
-function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, multiSelectedArray}) {
-    let nameToShow;
-    if (name) {
+function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, multiSelectedArray, nameToShow}) {
+    if (name && !nameToShow) {
         const toUpperCase = name.split('');
         toUpperCase[0] = toUpperCase[0].toUpperCase();
         nameToShow = toUpperCase.join('');
-        if (nameToShow === 'LifeSpan') nameToShow = 'Life span';
-        if (nameToShow === 'UrlImage') nameToShow = 'Url image';
     }
     if(multiSelectArray && multiSelectArray[0] !== '') {
         multiSelectArray.unshift('');
