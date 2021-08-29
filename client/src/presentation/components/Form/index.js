@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setTemperamentsToSelect, setUrlImage, setWeight } from '../../../logic/actions';
 import Errors from '../Errors';
-import Input from '../Input';
+import InputMultiSelect from '../InputMultiSelect';
+import InputSelectRange from '../InputSelectRange';
+import InputText from '../InputText';
 import Selected from '../Selected';
 import './index.css';
 
@@ -141,12 +143,12 @@ function Form() {
 
     return (
         <div className="form">
-			<Input type="text" name="name" value={breed} handleInputChange={handleChange}/>
-            <Input type="2-selects" name="height" value={height} max={200} units="cm" handleInputChange={handleChange}/>
-            <Input type="2-selects" name="weight" value={weight} max={50} units="Kg" handleInputChange={handleChange}/>
-            <Input type="2-selects" name="lifeSpan" value={lifeSpan} optional={true} max={20} units="years" handleInputChange={handleChange}/>
-            <Input type="text" name="urlImage" value={urlImage} optional={true} handleInputChange={handleChange}/>
-            <Input type="multi-select" name="temperaments" optional={true} multiSelectArray={temperamentsToSelect} multiSelectedArray={selectedTemperaments} handleInputChange={handleChange}/>
+			<InputText type="text" name="name" value={breed} handleInputChange={handleChange}/>
+            <InputSelectRange name="height" value={height} max={200} units="cm" handleInputChange={handleChange}/>
+            <InputSelectRange name="weight" value={weight} max={50} units="Kg" handleInputChange={handleChange}/>
+            <InputSelectRange name="lifeSpan" value={lifeSpan} optional={true} max={20} units="years" handleInputChange={handleChange}/>
+            <InputText type="text" name="urlImage" value={urlImage} optional={true} handleInputChange={handleChange}/>
+            <InputMultiSelect name="temperaments" optional={true} multiSelectArray={temperamentsToSelect} multiSelectedArray={selectedTemperaments} handleInputChange={handleChange}/>
             {selectedTemperaments.length > 0 && <Selected array={selectedTemperaments} />}
             <div className="requiredMessage">* Required fields</div>
             {(Object.keys(errors).length > 0 && errors.error !== 0) && <Errors errors={Object.values(errors)} />}
