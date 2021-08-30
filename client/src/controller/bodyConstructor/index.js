@@ -11,6 +11,13 @@ function bodyConstructor(actions, dispatch, target, bodyInputs) {
                 dispatch(setSelectedTemperaments([...selectedTemperaments]));
             }
             break;
+
+        case 'removeTemperament':
+            if (value) {
+                selectedTemperaments.splice(value, 1);
+                dispatch(setSelectedTemperaments([...selectedTemperaments]));
+            }
+            break;
     
         case 'name':
             dispatch(setBreed(value));
