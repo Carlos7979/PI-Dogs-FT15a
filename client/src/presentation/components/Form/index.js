@@ -52,10 +52,10 @@ function Form() {
 
     return (
         <div className="form">
-			<InputText type="text" name="name" value={breed} handleInputChange={handleChange}/>
-            <InputSelectRange name="height" value={height} max={200} units="cm" handleInputChange={handleChange}/>
-            <InputSelectRange name="weight" value={weight} max={50} units="Kg" handleInputChange={handleChange}/>
-            <InputSelectRange name="lifeSpan" value={lifeSpan} optional={true} max={20} units="years" handleInputChange={handleChange}/>
+			<InputText error={errors.name && 'warning'} type="text" name="name" value={breed} handleInputChange={handleChange}/>
+            <InputSelectRange error={errors.height && 'warning'} name="height" value={height} max={200} units="cm" handleInputChange={handleChange}/>
+            <InputSelectRange error={errors.weight && 'warning'} name="weight" value={weight} max={50} units="Kg" handleInputChange={handleChange}/>
+            <InputSelectRange error={errors.lifeSpan && 'warning'} name="lifeSpan" value={lifeSpan} optional={true} max={20} units="years" handleInputChange={handleChange}/>
             <InputText type="text" name="urlImage" nameToShow="Url image" value={urlImage} optional={true} handleInputChange={handleChange}/>
             <InputMultiSelect name="selectedTemperaments" nameToShow="Temperaments" optional={true} multiSelectArray={temperamentsToSelect} multiSelectedArray={selectedTemperaments} handleInputChange={handleChange}/>
             {selectedTemperaments.length > 0 && <Selected array={selectedTemperaments} />}

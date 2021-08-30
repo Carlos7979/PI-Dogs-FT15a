@@ -1,6 +1,6 @@
 import './index.css';
 
-function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, multiSelectedArray, nameToShow}) {
+function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, multiSelectedArray, nameToShow, error}) {
     if (name && !nameToShow) {
         const toUpperCase = name.split('');
         toUpperCase[0] = toUpperCase[0].toUpperCase();
@@ -11,7 +11,7 @@ function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, 
     }
     return (
         <div className="input-container">
-            <label className="label-form" htmlFor={`${name}-input`}>{!optional && '*'}{nameToShow}:</label>
+            <label className={"label-form " + error} htmlFor={`${name}-input`}>{!optional && '*'}{nameToShow}:</label>
                 <select id={`${name}-input`} value={multiSelectedArray.length > 0 && multiSelectedArray[multiSelectedArray.length - 1]} name={name} onChange={handleInputChange}>
                     {multiSelectArray.map((element, index) => {
                         if (index === 0) return <option key={`min-${index}`}></option>

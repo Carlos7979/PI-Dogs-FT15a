@@ -1,6 +1,6 @@
 import './index.css';
 
-function InputSelectRange({name, value, handleInputChange, max, units, optional, nameToShow}) {
+function InputSelectRange({name, value, handleInputChange, max, units, optional, nameToShow, error}) {
     if (name && !nameToShow) {
         const toUpperCase = name.split('');
         toUpperCase[0] = toUpperCase[0].toUpperCase();
@@ -12,7 +12,7 @@ function InputSelectRange({name, value, handleInputChange, max, units, optional,
     }
     return (
         <div className="input-container">
-            <label className="label-form" htmlFor={`${name}-input`}>{!optional && '*'}{nameToShow} ({units}):</label>
+            <label className={"label-form " + error} htmlFor={`${name}-input`}>{!optional && '*'}{nameToShow} ({units}):</label>
             <select id={`${name}-input`} value={value[0]} name={`${name}-1`} onChange={handleInputChange}>
                 {maxArray.map((element, index) => {
                     if (index === 0) return <option key={`min-${index}`}></option>

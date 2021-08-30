@@ -5,3 +5,7 @@
 .label-form {
     margin-right: 2px;
 }
+
+.warning {
+    color: red;
+}
