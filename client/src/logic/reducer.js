@@ -4,7 +4,7 @@ import {
     CLEANDOGS, SETORDER, ORDERDOGS, ORDERFILTERED, SETDOG, 
     SETBREED, SETHEIGHT, SETWEIGHT, SETLIFESPAN, SETURLIMAGE, 
     SETTEMPERAMENTSTOSELECT, SETSELECTEDTEMPERAMENTS, SETERRORS, 
-    SETBODY, CREATEDOG, CLEANCREATE, CLEANNEW
+    SETBODY, CREATEDOG, CLEANCREATE, CLEANNEW, UPDATEDOGS
  } from './actions';
 
 const initialState = {
@@ -138,6 +138,8 @@ function reducer(state = initialState, action) {
         case CLEANNEW:
             return {...state, new: {}};
         
+        case UPDATEDOGS:
+            return {...state, dogs: action.payload};   
 
         default:
             return state;

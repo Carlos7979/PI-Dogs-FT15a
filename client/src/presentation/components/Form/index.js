@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { bodyValidate, bodyConstructor } from '../../../controller';
-import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight } from '../../../logic/actions';
+import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight, updateDogs } from '../../../logic/actions';
 import Errors from '../Errors';
 import InputMultiSelect from '../InputMultiSelect';
 import InputSelectRange from '../InputSelectRange';
@@ -23,9 +23,13 @@ function Form() {
     const newDog = useSelector(state => state.new);
     const dispatch = useDispatch();
     const history = useHistory();
+    const dogs = useSelector(state => state.dogs);
+    const order = useSelector(state => state.order);
+
     useEffect(() => {
         if (newDog.id) {
             dispatch(setDog(newDog.id));
+            dispatch(updateDogs(dogs, newDog, order));
             dispatch(cleanNew());
             history.push(`/detail`);
         }

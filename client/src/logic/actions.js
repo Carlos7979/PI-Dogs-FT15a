@@ -27,6 +27,7 @@ export const SETBODY = 'SETBODY';
 export const CREATEDOG = 'CREATEDOG';
 export const CLEANCREATE = 'CLEANCREATE';
 export const CLEANNEW = 'CLEANNEW';
+export const UPDATEDOGS = 'UPDATEDOGS';
 
 export function isLog(payload) {
     return {
@@ -190,6 +191,16 @@ export function cleanCreate() {
 export function cleanNew() {
     return {
         type: CLEANNEW
+    }
+}
+
+export function updateDogs(dogs, newDog, order) {
+    if (!newDog.urlImage) newDog.urlImage = "https://agencias.assist1.com.co/assets/images/no-image.png";
+    dogs.push(newDog);
+    const action = orderDogs(dogs, order);
+    return {
+        type: UPDATEDOGS,
+        payload: action.payload
     }
 }
 
