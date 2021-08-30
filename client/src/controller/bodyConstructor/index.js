@@ -1,7 +1,8 @@
 function bodyConstructor(actions, dispatch, target, bodyInputs) {
     const { setBreed, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight } = actions;
-    const { height, weight, lifeSpan, urlImage, selectedTemperaments } = bodyInputs;
+    const { height, weight, lifeSpan, urlImage } = bodyInputs;
     let breed = bodyInputs.breed;
+    let selectedTemperaments = bodyInputs.selectedTemperaments;
     const name = target.name;
     const value = target.value;
     switch (name) {
@@ -17,6 +18,11 @@ function bodyConstructor(actions, dispatch, target, bodyInputs) {
                 selectedTemperaments.splice(value, 1);
                 dispatch(setSelectedTemperaments([...selectedTemperaments]));
             }
+            break;
+
+        case 'removeTemperaments':
+            selectedTemperaments = [];
+            dispatch(setSelectedTemperaments(selectedTemperaments));
             break;
     
         case 'name':

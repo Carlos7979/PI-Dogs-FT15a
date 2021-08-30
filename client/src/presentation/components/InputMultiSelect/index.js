@@ -12,14 +12,15 @@ function InputMultiSelect({name, handleInputChange, optional, multiSelectArray, 
     return (
         <div className="input-container">
             <label className={"label-form " + error} htmlFor={`${name}-input`}>{!optional && '*'}{nameToShow}:</label>
-                <select id={`${name}-input`} value={multiSelectedArray.length > 0 && multiSelectedArray[multiSelectedArray.length - 1]} name={name} onChange={handleInputChange}>
-                    {multiSelectArray.map((element, index) => {
-                        if (index === 0) return <option key={`min-${index}`}></option>
-                        if (!multiSelectedArray.some(temperament => element === temperament)) {
-                            return <option key={`temperament-${index}`}>{element}</option>
-                        }
-                    })}
-                </select>
+            <select id={`${name}-input`} value={multiSelectedArray.length > 0 && multiSelectedArray[multiSelectedArray.length - 1]} name={name} onChange={handleInputChange}>
+                {multiSelectArray.map((element, index) => {
+                    if (index === 0) return <option key={`min-${index}`}></option>
+                    if (!multiSelectedArray.some(temperament => element === temperament)) {
+                        return <option key={`temperament-${index}`}>{element}</option>
+                    }
+                })}
+            </select>
+            
         </div>
     )
 }

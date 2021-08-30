@@ -56,6 +56,10 @@ function Form() {
         handleChange({target: {name: "removeTemperament", value: index}});
     }
 
+    const handleClickClearTemperaments = () => {
+        handleChange({target: {name: "removeTemperaments"}});
+    }
+
     return (
         <div className="form">
 			<InputText error={errors.name && 'warning'} type="text" name="name" value={breed} handleInputChange={handleChange}/>
@@ -64,10 +68,10 @@ function Form() {
             <InputSelectRange error={errors.lifeSpan && 'warning'} name="lifeSpan" value={lifeSpan} optional={true} max={20} units="years" handleInputChange={handleChange}/>
             <InputText type="text" name="urlImage" nameToShow="Url image" value={urlImage} optional={true} handleInputChange={handleChange}/>
             <InputMultiSelect name="selectedTemperaments" nameToShow="Temperaments" optional={true} multiSelectArray={temperamentsToSelect} multiSelectedArray={selectedTemperaments} handleInputChange={handleChange}/>
-            {selectedTemperaments.length > 0 && <Selected array={selectedTemperaments} onClick={handleClickClearTemperament}/>}
+            {selectedTemperaments.length > 0 && <Selected array={selectedTemperaments} onClickClearTemperament={handleClickClearTemperament} multiSelectedArray={selectedTemperaments} onClickClearTemperaments={handleClickClearTemperaments}/>}
             <div className="requiredMessage">* Required fields</div>
             {(Object.keys(errors).length > 0 && errors.error !== 0) && <Errors errors={Object.values(errors)} />}
-            <button disabled={Object.keys(errors).length > 0} onClick={handleClickCreate} >Create</button>
+            <button disabled={Object.keys(errors).length > 0} onClick={handleClickCreate}>Create</button>
             <button onClick={handleClickClear} >Clear fields</button>
         </div>
     )
