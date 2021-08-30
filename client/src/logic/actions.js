@@ -28,6 +28,7 @@ export const CREATEDOG = 'CREATEDOG';
 export const CLEANCREATE = 'CLEANCREATE';
 export const CLEANNEW = 'CLEANNEW';
 export const UPDATEDOGS = 'UPDATEDOGS';
+export const UPDATEFILTERED = 'UPDATEFILTERED';
 
 export function isLog(payload) {
     return {
@@ -201,6 +202,13 @@ export function updateDogs(dogs, newDog, order) {
     return {
         type: UPDATEDOGS,
         payload: action.payload
+    }
+}
+
+export function updateFiltered(payload) {
+    return {
+        type: UPDATEFILTERED,
+        payload
     }
 }
 

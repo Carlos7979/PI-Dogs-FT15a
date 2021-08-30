@@ -1,46 +1,20 @@
 import { useDispatch } from 'react-redux';
+import { filterDogs, temperamentsInDogs } from '../../../controller';
 import { setFilter, setFiltered } from '../../../logic/actions';
 import './index.css';
 
 function Filter({dogs, filter}) {
     const dispatch = useDispatch();
-    const temperamentsInDogs = []
-    for (const dog of dogs) {
-        if (dog.temperament) {
-            const temperamentsInDog = dog.temperament.toLowerCase().split(', ');
-            for (const temperament of temperamentsInDog) {
-                if (!temperamentsInDogs.some(e => e === temperament)){
-                    temperamentsInDogs.push(temperament);
-                }
-            }
-        }
-    }
-    temperamentsInDogs.sort().unshift('not registered');
-    temperamentsInDogs.unshift('all');
+    const temperaments = temperamentsInDogs(dogs);
     const handleChange = event => {
         const value = event.target.value;
-        const filtered = [];
-        dispatch(setFilter(value));
-        if (value === 'not registered') {
-            for (const dog of dogs) {
-                if (!dog.temperament) {
-                    filtered.push(dog);
-                }
-            }
-        } else {
-            for (const dog of dogs) {
-                if (dog.temperament && dog.temperament.toLowerCase().includes(value)) {
-                    filtered.push(dog);
-                }
-            }
-        }
-        dispatch(setFiltered(filtered));
+        filterDogs(dispatch, setFilter, setFiltered, dogs, value);
     }
     return (
         <div className="filter">
             <span>Filter by temperament</span>
-            <select value={filter} onChange={handleChange}>
-                {temperamentsInDogs.map((temperament, index) => {
+            <select value={filter} onChange={handleChange} ref={input => input && input.blur()}>
+                {temperaments.map((temperament, index) => {
                     return <option key={`filter-${index}`}>{temperament}</option>
                 })}
             </select>

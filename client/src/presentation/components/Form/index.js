@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { bodyValidate, bodyConstructor } from '../../../controller';
-import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight, updateDogs } from '../../../logic/actions';
+import { bodyValidate, bodyConstructor, filterDogs } from '../../../controller';
+import { cleanCreate, cleanNew, createDog, setBody, setBreed, setDog, setErrors, setHeight, setLifeSpan, setSelectedTemperaments, setUrlImage, setWeight, updateDogs, updateFiltered } from '../../../logic/actions';
 import Errors from '../Errors';
 import InputMultiSelect from '../InputMultiSelect';
 import InputSelectRange from '../InputSelectRange';
@@ -25,11 +25,16 @@ function Form() {
     const history = useHistory();
     const dogs = useSelector(state => state.dogs);
     const order = useSelector(state => state.order);
+    const filtered = useSelector(state => state.filtered);
+    const filter = useSelector(state => state.filter);
 
     useEffect(() => {
         if (newDog.id) {
             dispatch(setDog(newDog.id));
             dispatch(updateDogs(dogs, newDog, order));
+            if(filtered.length > 0) {
+                filterDogs(dispatch, undefined, undefined, dogs, filter, true, updateFiltered);
+            }
             dispatch(cleanNew());
             history.push(`/detail`);
         }
